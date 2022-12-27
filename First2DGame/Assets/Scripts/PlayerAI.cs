@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using System;
+
 public class PlayerAI : MonoBehaviour
 {
 
@@ -21,7 +23,12 @@ public class PlayerAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating("UpdatePath", 0f, .5f);
+        seeker.StartPath(rb.position, target.position, OnPathComplete);
+
+        print("hi");
+        Debug.Log("efai");
+        
+        //InvokeRepeating("UpdatePath", 0f, .5f);
         
     }
 
@@ -41,6 +48,11 @@ public class PlayerAI : MonoBehaviour
         {
             path = p;
             currentWaypoint = 0;
+            for (int i = 0; i < path.vectorPath.Count; i++)
+            {
+                print("apth: " + Convert.ToString(path.vectorPath[i]));
+            }
+            
         }
     }
 
