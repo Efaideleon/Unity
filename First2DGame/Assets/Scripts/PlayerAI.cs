@@ -83,5 +83,9 @@ public class PlayerAI : MonoBehaviour
         {
             currentWaypoint++;
         }
+
+
+
+        transform.position = path[i]
     }
 }
