@@ -16,6 +16,9 @@ public class PlayerAI : MonoBehaviour
 
     Seeker seeker;
     Rigidbody2D rb;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +76,18 @@ public class PlayerAI : MonoBehaviour
         }
 
 
+
+        
+
+
+
+
+
+
+
+
+
+        /*
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
@@ -84,7 +99,7 @@ public class PlayerAI : MonoBehaviour
         {
             currentWaypoint++;
         }
-
+        */
 
 
         
