@@ -10,7 +10,6 @@ public class PlayerAI : MonoBehaviour
     public Transform target;
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
-
     Path path;
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
@@ -72,6 +71,8 @@ public class PlayerAI : MonoBehaviour
         {
             reachedEndOfPath = false;
         }
+
+
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
@@ -86,6 +87,6 @@ public class PlayerAI : MonoBehaviour
 
 
 
-        transform.position = path[i]
+        
     }
 }
