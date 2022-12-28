@@ -7,7 +7,7 @@ using System;
 public class PlayerAI : MonoBehaviour
 {
 
-    public Transform target;
+    //public Transform target;
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
     Path path;
@@ -17,7 +17,7 @@ public class PlayerAI : MonoBehaviour
     Seeker seeker;
     Rigidbody2D rb;
 
-
+    private Vector3 clickPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +25,9 @@ public class PlayerAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        seeker.StartPath(rb.position, target.position, OnPathComplete);
-
+        
+        clickPosition = transform.position;
+        UpdatePath();
         print("hi");
         Debug.Log("efai");
         
@@ -36,11 +37,13 @@ public class PlayerAI : MonoBehaviour
 
     void UpdatePath()
     {
-        if (seeker.IsDone())
+        if (transform.position != clickPosition)
         {
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
+            if (seeker.IsDone())
+            {
+                seeker.StartPath(transform.position, clickPosition, OnPathComplete);
+            }
         }
-
         
     }
 
@@ -50,10 +53,10 @@ public class PlayerAI : MonoBehaviour
         {
             path = p;
             currentWaypoint = 0;
-            for (int i = 0; i < path.vectorPath.Count; i++)
-            {
-                print("apth: " + Convert.ToString(path.vectorPath[i]));
-            }
+            //for (int i = 0; i < path.vectorPath.Count; i++)
+            //{
+               // print("apth: " + Convert.ToString(path.vectorPath[i]));
+            //}
             
         }
     }
@@ -62,16 +65,42 @@ public class PlayerAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (path == null)
-            return;
+        if (Input.GetMouseButton(0))
+        {
+            clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            clickPosition.z = transform.position.z;
+            currentWaypoint = 0;
+            //print("clicked");
+            UpdatePath();
+        }
 
-        if(currentWaypoint >= path.vectorPath.Count)
+        if (path == null)
+        {
+            print("chicken");
+            return;
+        }
+
+
+        //    return;
+
+        if (currentWaypoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
-            return;
+
+            //return;
         }
         else
         {
+            
+            transform.position = Vector3.MoveTowards(transform.position, (Vector3)path.vectorPath[currentWaypoint], speed * Time.deltaTime);
+            print("currentWaypoint: " + currentWaypoint);
+            print("path count" + path.vectorPath.Count);
+            float distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
+
+            if (distance == 0 && !reachedEndOfPath)
+            {
+                currentWaypoint++;
+            }
             reachedEndOfPath = false;
         }
 
@@ -80,9 +109,14 @@ public class PlayerAI : MonoBehaviour
         
 
 
+  
 
 
 
+
+
+        
+    
 
 
 
@@ -102,6 +136,6 @@ public class PlayerAI : MonoBehaviour
         */
 
 
-        
+
     }
 }
