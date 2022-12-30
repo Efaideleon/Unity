@@ -20,10 +20,13 @@ namespace sadefai
 
         }
 
-        public Vector3 getPositionOfCheckpoint()
+        public void getPositionsOfCheckpoints()
         {
-            print(checkpoints[0].transform.position);
-            return checkpoints[0].transform.position;
+            for(int i = 0; i < checkpoints.Length; i++)
+            {
+                print(checkpoints[i].transform.position); 
+            }
+            
         }
     }
 }

@@ -19,9 +19,9 @@ public class PlayerPathing : MonoBehaviour
     void Awake()
     {
      
-        Vector3 squareposition = pathcreator.getPositionOfCheckpoint();
-        transform.position = squareposition;
-        print(squareposition);
+        pathcreator.getPositionsOfCheckpoints();
+        //transform.position = squareposition;
+        //print(squareposition);
     }
 
 
