@@ -7,24 +7,41 @@ public class PlayerPathing : MonoBehaviour
 {
 
     Vector2 target;
-    Vector3 checkpoint1;
-    Vector3 checkpoint2;
-    Vector3 checkpoint3;
+    string start;
     private float speed = 6;
     private int currentCheckpoint = 0;
     private bool move = true;
-    [SerializeField] private PathCreator pathcreator;
+    [SerializeField] private Graph graph;
     float distanceLeft = 0;
 
-    private List<Vector3> p;
+    private List<Vector3> path;
     void Start()
-    {    
-        p = pathcreator.getPath();
-        foreach(Vector3 pos in p)
+    {
+        Dictionary<string, string> nodeNeighbors = new Dictionary<string, string>
+        {
+            { "A", "BD" },
+            { "B", "ACF" },
+            { "C", "BFH" },
+            { "D", "AFI" },
+            { "E", "DF" }, //revise
+            { "F", "DBHK" },
+            { "G", "FH" },
+            { "H", "CFM" },
+            { "I", "DK" },
+            { "J", "DF" },
+            { "K", "IFM" },
+            { "L", "FH" },
+            { "M", "KH"},
+        };
+
+        start = "A";
+        graph = new Graph(nodeNeighbors);
+        path = graph.createPath(start, "K");
+        foreach(Vector3 pos in path)
         {
             print(pos);
         }
-        transform.position = pathcreator.getStartingNode().Position;
+        transform.position = graph.getStartingPosition(start);
     }
 
 
@@ -35,14 +52,14 @@ public class PlayerPathing : MonoBehaviour
 
         if (move)
         {
-            transform.position = Vector3.MoveTowards(transform.position, (Vector3)p[currentCheckpoint], speed * Time.deltaTime);
-            distanceLeft = pathcreator.distance(transform.position, (Vector3)p[currentCheckpoint]);
+            transform.position = Vector3.MoveTowards(transform.position, (Vector3)path[currentCheckpoint], speed * Time.deltaTime);
+            distanceLeft = graph.distance(transform.position, (Vector3)path[currentCheckpoint]);
         }
         if ( distanceLeft == 0)
         {
             currentCheckpoint++;
         }
-        if (currentCheckpoint >= p.Count)
+        if (currentCheckpoint >= path.Count)
         {
             move = false;
         }

@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class Node
 {
-    private int value;
+    private string name;
     private Vector3 position;
-    private List<Node> neighbors;
+    private string neighbors;
 
-    public Node(int value, Vector3 position)
+    public Node(string name, Vector3 position, string neighbors )
     {
-        this.value = value;
+        this.name = name;
         this.position = position;
-    }
-
-    public int Value
-    {
-        get { return value; }
-        set { this.value = value; }
+        this.neighbors = neighbors;
     }
 
     public Vector3 Position
@@ -25,12 +20,16 @@ public class Node
         get { return position; }
     }
 
-    public List<Node> Neighbors
+    public string Neighbors
     {
         get { return neighbors; }
         set{ this.neighbors = value; }  
     }
 
+    public string Name
+    {
+        get { return name; }
+    }
 }
 
 

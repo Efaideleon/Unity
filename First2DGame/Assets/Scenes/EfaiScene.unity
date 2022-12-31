@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 62976983}
   - component: {fileID: 62976982}
   m_Layer: 7
-  m_Name: Square (1)
+  m_Name: B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 71095209}
   - component: {fileID: 71095208}
   m_Layer: 7
-  m_Name: Square (7)
+  m_Name: H
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9c6905820de45b78d7205006963c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathcreator: {fileID: 763886832}
+  graph: {fileID: 0}
 --- !u!1 &208944188
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 208944190}
   - component: {fileID: 208944189}
   m_Layer: 7
-  m_Name: Square (10)
+  m_Name: K
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291495788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
   m_Name: 
@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 425384999}
   - component: {fileID: 425384998}
   m_Layer: 7
-  m_Name: Square (5)
+  m_Name: F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 589839310}
   - component: {fileID: 589839309}
   m_Layer: 7
-  m_Name: Square (4)
+  m_Name: E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1048,7 +1048,7 @@ GameObject:
   - component: {fileID: 688163522}
   - component: {fileID: 688163521}
   m_Layer: 7
-  m_Name: Square (6)
+  m_Name: G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1314,7 +1314,7 @@ GameObject:
   - component: {fileID: 831625226}
   - component: {fileID: 831625225}
   m_Layer: 7
-  m_Name: Square
+  m_Name: A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1398,7 +1398,7 @@ GameObject:
   - component: {fileID: 883523347}
   - component: {fileID: 883523346}
   m_Layer: 7
-  m_Name: Square (12)
+  m_Name: M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1684,7 +1684,7 @@ GameObject:
   - component: {fileID: 1065483770}
   - component: {fileID: 1065483769}
   m_Layer: 7
-  m_Name: Square (9)
+  m_Name: J
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1768,7 +1768,7 @@ GameObject:
   - component: {fileID: 1076845808}
   - component: {fileID: 1076845807}
   m_Layer: 7
-  m_Name: Square (8)
+  m_Name: I
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1852,7 +1852,7 @@ GameObject:
   - component: {fileID: 1105946087}
   - component: {fileID: 1105946086}
   m_Layer: 7
-  m_Name: Square (3)
+  m_Name: D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1936,7 +1936,7 @@ GameObject:
   - component: {fileID: 1286907284}
   - component: {fileID: 1286907283}
   m_Layer: 7
-  m_Name: Square (2)
+  m_Name: C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2142,7 +2142,7 @@ GameObject:
   - component: {fileID: 1498652814}
   - component: {fileID: 1498652813}
   m_Layer: 7
-  m_Name: Square (11)
+  m_Name: L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
