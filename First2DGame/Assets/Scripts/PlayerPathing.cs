@@ -10,25 +10,42 @@ public class PlayerPathing : MonoBehaviour
     Vector3 checkpoint1;
     Vector3 checkpoint2;
     Vector3 checkpoint3;
-
-
+    private float speed = 6;
+    private int currentCheckpoint = 0;
+    private bool move = true;
     [SerializeField] private PathCreator pathcreator;
-    // Start is called before the first frame update
+    float distanceLeft = 0;
 
-
-    void Awake()
-    {
-     
-        pathcreator.getPositionsOfCheckpoints();
-        //transform.position = squareposition;
-        //print(squareposition);
+    private List<Vector3> p;
+    void Start()
+    {    
+        p = pathcreator.getPath();
+        foreach(Vector3 pos in p)
+        {
+            print(pos);
+        }
+        transform.position = pathcreator.getStartingNode().Position;
     }
 
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-      
+
+        if (move)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, (Vector3)p[currentCheckpoint], speed * Time.deltaTime);
+            distanceLeft = pathcreator.distance(transform.position, (Vector3)p[currentCheckpoint]);
+        }
+        if ( distanceLeft == 0)
+        {
+            currentCheckpoint++;
+        }
+        if (currentCheckpoint >= p.Count)
+        {
+            move = false;
+        }
+        
     }
 }
