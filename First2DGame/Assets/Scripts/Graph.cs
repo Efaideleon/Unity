@@ -12,15 +12,10 @@ namespace sadefai
     public class Graph : MonoBehaviour
     {
         [SerializeField] private GameObject[] checkpoints;
-        private List<Vector3> path;
-        private int col = 5;
-        private int row = 5;
-        private int count = 0;
-        private int index = 0;
-        private Vector3 temp;
+        
         private List<Node> nodeList;
        
-        public Graph(Dictionary<string, string> nodes)
+        public void createGraph(Dictionary<string, string> nodes)
         {
             nodeList = new List<Node>();
             string name;
@@ -40,7 +35,12 @@ namespace sadefai
 
         public List<Vector3> createPath(string current, string final)
         {
-            path = new List<Vector3>();
+            if (current == final)
+            {
+                return new List<Vector3> { findNode(current).Position };
+            }
+
+            List<Vector3> path = new List<Vector3>();
             Node currentNode = findNode(current);
             Node finalNode = findNode(final);
 
@@ -68,12 +68,6 @@ namespace sadefai
                         
                         List<Node> newPath = new List<Node>(nodePath);
                         newPath.Add(neighbor);
-                        print("newPath");
-                        foreach(Node n in newPath)
-                        {
-                            print(n.Name);
-                        }
-                        print("end");
                         queue.Add(newPath);
 
                         if (neighbor.Name == finalNode.Name)
@@ -81,10 +75,8 @@ namespace sadefai
                             print("shortest path found");
                             foreach(Node node1 in newPath)
                             {
-                                print(node1.Name);
-                                print(node1.Position);
                                 path.Add(node1.Position);
-                                
+                                print(node1.Name);
                             }
                             return path;
                         }
@@ -102,15 +94,9 @@ namespace sadefai
             return distance.magnitude;
         }
 
-
         public Node findNode(string name)
         {
             return nodeList.Find(x => x.Name == name);         
-        }
-
-        public Vector3 getStartingPosition(string start)
-        {
-            return findNode(start).Position;
         }
 
     }
