@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/EfaiScene.unity
+    guid: f2b90b019662046e3979703d66afd400
   m_configObjects: {}
