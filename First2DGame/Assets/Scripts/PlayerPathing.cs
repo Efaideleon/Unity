@@ -53,11 +53,15 @@ public class PlayerPathing : MonoBehaviour
             lastNode = target;
             Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Collider2D clickedCollider = Physics2D.OverlapPoint(mouseWorldPosition);
-            target = clickedCollider.name;
-            print(target);
-            path = graph.createPath(lastNode, target);
-            move = true;
-            currentCheckpoint = 0;
+            if(target != null)
+            {
+                target = clickedCollider.name;
+                print(target);
+                path = graph.createPath(lastNode, target);
+                move = true;
+                currentCheckpoint = 0;
+            }
+            
         }
 
 
