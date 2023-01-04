@@ -6,12 +6,12 @@ using sadefai;
 public class PlayerPathing : MonoBehaviour
 {
 
-    string target;
-    string lastNode;
+    string targetNodeName;
+    string currentNodeName;
     private float speed = 6;
     private int currentCheckpoint = 0;
     private bool move = true;
-    [SerializeField] private Graph graph;
+    [SerializeField] private Graph graph;  
     float distanceLeft = 0;
 
     private List<Vector3> path;
@@ -21,10 +21,10 @@ public class PlayerPathing : MonoBehaviour
         {
             { "A", "BD" },
             { "B", "ACF" },
-            { "C", "BFH" },
-            { "D", "AFI" },
+            { "C", "BH" },
+            { "D", "EAFI" },
             { "E", "DF" }, //revise
-            { "F", "DBHK" },
+            { "F", "EDBHK" },
             { "G", "FH" },
             { "H", "CFM" },
             { "I", "DK" },
@@ -35,37 +35,34 @@ public class PlayerPathing : MonoBehaviour
         };
 
         graph.createGraph(nodeNeighbors);
-        lastNode = "A";
-        target = "A";
-        transform.position = graph.findNode(lastNode).Position;
-        path = graph.createPath(lastNode, target);
+        currentNodeName = "A";
+        transform.position = graph.findNode(currentNodeName).Position;
     }
 
 
 
     // Update is called once per frame
     void Update()
-    {
-
-        
-        if (Input.GetMouseButtonDown(0))
+    { 
+        if (Input.GetMouseButtonDown(0) && distanceLeft == 0)
         {
-            lastNode = target;
             Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Collider2D clickedCollider = Physics2D.OverlapPoint(mouseWorldPosition);
-            if(target != null)
-            {
-                target = clickedCollider.name;
-                print(target);
-                path = graph.createPath(lastNode, target);
-                move = true;
-                currentCheckpoint = 0;
-            }
             
+            if(clickedCollider != null)
+            {              
+                targetNodeName = clickedCollider.name;
+                path = graph.createPath(currentNodeName, targetNodeName);
+                if(path != null)
+                {
+                    move = true;
+                    currentCheckpoint = 0;
+                    currentNodeName = targetNodeName;     
+                }          
+            }   
         }
 
-
-        if(path.Count > 1)
+        if(path != null)
         {
             if (move)
             {
