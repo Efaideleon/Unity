@@ -6,12 +6,12 @@ using sadefai;
 public class PlayerPathing : MonoBehaviour
 {
 
-    Vector2 target;
-    string start;
+    string targetNodeName;
+    string currentNodeName;
     private float speed = 6;
     private int currentCheckpoint = 0;
     private bool move = true;
-    [SerializeField] private Graph graph;
+    [SerializeField] private Graph graph;  
     float distanceLeft = 0;
 
     private List<Vector3> path;
@@ -21,10 +21,10 @@ public class PlayerPathing : MonoBehaviour
         {
             { "A", "BD" },
             { "B", "ACF" },
-            { "C", "BFH" },
-            { "D", "AFI" },
+            { "C", "BH" },
+            { "D", "EAFI" },
             { "E", "DF" }, //revise
-            { "F", "DBHK" },
+            { "F", "EDBHK" },
             { "G", "FH" },
             { "H", "CFM" },
             { "I", "DK" },
@@ -34,35 +34,49 @@ public class PlayerPathing : MonoBehaviour
             { "M", "KH"},
         };
 
-        start = "A";
-        graph = new Graph(nodeNeighbors);
-        path = graph.createPath(start, "K");
-        foreach(Vector3 pos in path)
-        {
-            print(pos);
-        }
-        transform.position = graph.getStartingPosition(start);
+        graph.createGraph(nodeNeighbors);
+        currentNodeName = "A";
+        transform.position = graph.findNode(currentNodeName).Position;
     }
 
 
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
+    void Update()
+    { 
+        if (Input.GetMouseButtonDown(0) && distanceLeft == 0)
+        {
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D clickedCollider = Physics2D.OverlapPoint(mouseWorldPosition);
+            
+            if(clickedCollider != null)
+            {              
+                targetNodeName = clickedCollider.name;
+                path = graph.createPath(currentNodeName, targetNodeName);
+                if(path != null)
+                {
+                    move = true;
+                    currentCheckpoint = 0;
+                    currentNodeName = targetNodeName;     
+                }          
+            }   
+        }
 
-        if (move)
+        if(path != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, (Vector3)path[currentCheckpoint], speed * Time.deltaTime);
-            distanceLeft = graph.distance(transform.position, (Vector3)path[currentCheckpoint]);
+            if (move)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, (Vector3)path[currentCheckpoint], speed * Time.deltaTime);
+                distanceLeft = graph.distance(transform.position, (Vector3)path[currentCheckpoint]);
+            }
+            if (distanceLeft == 0)
+            {
+                currentCheckpoint++;
+            }
+            if (currentCheckpoint >= path.Count)
+            {
+                move = false;
+            }
         }
-        if ( distanceLeft == 0)
-        {
-            currentCheckpoint++;
-        }
-        if (currentCheckpoint >= path.Count)
-        {
-            move = false;
-        }
-        
     }
 }
