@@ -4,14 +4,13 @@ using UnityEngine;
 using sadefai; 
 public class GameController : MonoBehaviour
 {
-
+    [SerializeField] private Graph graph;  
+    [SerializeField] private Player player;
     string targetNodeName;
     string currentNodeName;
     private float speed = 6;
     private int currentCheckpoint = 0;
     private bool move = true;
-    [SerializeField] private Graph graph;  
-    [SerializeField] private Player player;
     float distanceLeft = 0;
     private List<Vector3> path;
     void Start()
