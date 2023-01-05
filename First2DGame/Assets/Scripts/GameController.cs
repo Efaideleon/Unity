@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using sadefai; 
-public class PlayerPathing : MonoBehaviour
+public class GameController : MonoBehaviour
 {
 
     string targetNodeName;
@@ -11,8 +11,8 @@ public class PlayerPathing : MonoBehaviour
     private int currentCheckpoint = 0;
     private bool move = true;
     [SerializeField] private Graph graph;  
+    [SerializeField] private Player player;
     float distanceLeft = 0;
-
     private List<Vector3> path;
     void Start()
     {
@@ -37,7 +37,7 @@ public class PlayerPathing : MonoBehaviour
 
         graph.createGraph(nodeNeighbors);
         currentNodeName = "A";
-        transform.position = graph.findNode(currentNodeName).Position;
+        player.Position = graph.findNode(currentNodeName).Position;
     }
 
 
@@ -68,8 +68,8 @@ public class PlayerPathing : MonoBehaviour
         {
             if (move)
             {
-                transform.position = Vector3.MoveTowards(transform.position, (Vector3)path[currentCheckpoint], speed * Time.deltaTime);
-                distanceLeft = graph.distance(transform.position, (Vector3)path[currentCheckpoint]);
+                player.Position = Vector3.MoveTowards(player.Position, (Vector3)path[currentCheckpoint], speed * Time.deltaTime);
+                distanceLeft = graph.distance(player.Position, (Vector3)path[currentCheckpoint]);
             }
             if (distanceLeft == 0)
             {
