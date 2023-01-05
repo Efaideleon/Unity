@@ -22,16 +22,18 @@ public class PlayerPathing : MonoBehaviour
             { "A", "BD" },
             { "B", "ACF" },
             { "C", "BH" },
-            { "D", "EAFI" },
-            { "E", "DF" }, //revise
-            { "F", "EDBHK" },
-            { "G", "FH" },
-            { "H", "CFM" },
+            { "D", "NAI" },
+            { "E", "N" }, //revise
+            { "F", "NBOK" },
+            { "G", "O" },
+            { "H", "COM" },
             { "I", "DK" },
-            { "J", "DF" },
+            { "J", "N" },
             { "K", "IFM" },
-            { "L", "FH" },
+            { "L", "O" },
             { "M", "KH"},
+            { "N", "DEFJ"},
+            { "O", "FGHL" }
         };
 
         graph.createGraph(nodeNeighbors);
@@ -53,6 +55,7 @@ public class PlayerPathing : MonoBehaviour
             {              
                 targetNodeName = clickedCollider.name;
                 path = graph.createPath(currentNodeName, targetNodeName);
+
                 if(path != null)
                 {
                     move = true;
