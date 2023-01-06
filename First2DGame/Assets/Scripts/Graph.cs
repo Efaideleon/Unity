@@ -43,13 +43,13 @@ namespace sadefai
 
             if(currentNode == null || finalNode == null)
             {
-                print("no path found");
+                print("no path found 1");
                 return null;
             }
 
             if (currentNodeName == targetNodeName)
             {
-                print("no path found");
+                print("no path found 2");
                 return null;
             }
             
@@ -88,7 +88,7 @@ namespace sadefai
                     explored.Add(node);
                 }
             }
-            print("no path found");
+            print("no path found 3");
             return null;   
         }
 
