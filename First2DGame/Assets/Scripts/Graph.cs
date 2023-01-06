@@ -102,5 +102,22 @@ namespace sadefai
         {
             return nodeList.Find(x => x.Name == name);         
         }
+    
+        public bool isNodeClicked(string clickedNodeName, string checkNodeName )
+        {
+            Node clickedNode = findNode(clickedNodeName);
+            if(clickedNode !=  null)
+            {
+                if(clickedNodeName == checkNodeName)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
     }
 }

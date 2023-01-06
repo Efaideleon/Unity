@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
     private bool move = true;
     float distanceLeft = 0;
     private List<Vector3> path;
+
+    private string counterNode;
     void Start()
     {
         Dictionary<string, string> nodeNeighbors = new Dictionary<string, string>
@@ -36,6 +38,7 @@ public class GameController : MonoBehaviour
 
         graph.createGraph(nodeNeighbors);
         currentNodeName = "A";
+        counterNode = "B";
         player.Position = graph.findNode(currentNodeName).Position;
     }
 
@@ -48,10 +51,19 @@ public class GameController : MonoBehaviour
         {
             Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Collider2D clickedCollider = Physics2D.OverlapPoint(mouseWorldPosition);
-            
+            print("player has plate " + player.HasPlate);
+
             if(clickedCollider != null)
             {              
                 targetNodeName = clickedCollider.name;
+                if(graph.isNodeClicked(targetNodeName, counterNode)) // 'B' is node where plate counter is at
+                {
+                    player.HasPlate = true;
+                }
+                if(graph.isNodeClicked(targetNodeName, "E"))
+                {
+                    player.HasPlate = false;
+                }
                 path = graph.createPath(currentNodeName, targetNodeName);
 
                 if(path != null)
