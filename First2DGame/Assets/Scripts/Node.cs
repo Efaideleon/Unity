@@ -23,7 +23,7 @@ public class Node
     public string Neighbors
     {
         get { return neighbors; }
-        set{ this.neighbors = value; }  
+        set { this.neighbors = value; }  
     }
 
     public string Name
