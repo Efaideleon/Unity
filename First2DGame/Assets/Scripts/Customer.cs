@@ -36,8 +36,10 @@ public class DragAndDrop : MonoBehaviour
         if (Vector2.Distance(transform.position, table1.transform.position) < 5) 
         {
             print("placed");
-            Vector3 newPos = new Vector3(-5.09f, 3.19f, 0f);
-            transform.position = newPos;
+            Vector3 offset = new Vector3(5.0f, 0.0f, 0f);
+            transform.position = table1.transform.position - offset;
+            print(transform.position);
+            print(table1.transform.position);
             placed = true;
         }
         else
