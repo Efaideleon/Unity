@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class DragAndDrop : MonoBehaviour
+public class Customer : MonoBehaviour
 {
-    private bool dragging, placed;
+    private bool dragging, placed, onTopOfTable;
     private Vector2 originalPosition; 
     private Vector2 offset;
     [SerializeField] private Animator animator;
-    [SerializeField] private Table table1;
+    private GameObject table;
     void Awake()
     {
         originalPosition = transform.position;
@@ -35,12 +35,13 @@ public class DragAndDrop : MonoBehaviour
 
     void OnMouseUp()
     {
-        if (Vector2.Distance(transform.position, table1.transform.position) < 5) 
-        {
+         
+        if(onTopOfTable){
             print("placed");
             onSeated();
             Vector3 offset = new Vector3(5.0f, 0.0f, 0f);
-            transform.position = table1.transform.position - offset;
+            transform.position = table.transform.position - offset;
+            this.transform.SetParent(table.transform);
             placed = true;
         }
         else
@@ -58,4 +59,24 @@ public class DragAndDrop : MonoBehaviour
     {
         animator.SetBool("isSeated", true);
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Table"))
+        {
+            table = other.gameObject;
+            print("on top of table");
+            onTopOfTable = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Table"))
+        {
+            onTopOfTable = false;
+            print("out of table");
+        }
+    }
+
 }
