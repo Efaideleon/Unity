@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-    [SerializeField] private GameObject checkpoint;
+    [SerializeField] private Node checkpoint;
     void Start()
     {
         

@@ -17,17 +17,17 @@ public class GameController : MonoBehaviour
             { "B", "ACF" },
             { "C", "BH" },
             { "D", "NAI" },
-            { "E", "N" }, //revise
+            //{ "E", "N" }, //revise
             { "F", "NBOK" },
-            { "G", "O" },
+            //{ "G", "O" },
             { "H", "COM" },
             { "I", "DK" },
-            { "J", "N" },
+            //{ "J", "N" },
             { "K", "IFM" },
-            { "L", "O" },
+            //{ "L", "O" },
             { "M", "KH"},
-            { "N", "DEFJ"},
-            { "O", "FGHL" }
+            { "N", "DF"},
+            { "O", "FH" }
         };
         graph.createGraph(nodeNeighbors);
         customerQueue = new List<GameObject>();

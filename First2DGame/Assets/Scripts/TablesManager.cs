@@ -31,7 +31,7 @@ public class TablesManager : MonoBehaviour
         listOfTables = new List<Table>();
 
         string [] tableNodeNames = {"W", "X", "Y", "Z"};
-        string [] neighbors = { "O", "N", "O", "N"};    
+        string [] neighbors = { "N", "O", "N", "O"};    
         for(int i = 0; i < numOfTablesAtStart; i++)
         {
             
