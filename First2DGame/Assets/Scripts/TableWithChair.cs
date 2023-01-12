@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Table : MonoBehaviour
 {
-    // Start is called before the first frame update
-
+    [SerializeField] private GameObject checkpoint; 
     void Start()
     {
 
     }
-
-    // Update is called once per frame
     void Update()
     {
         
     }
+
+    public string getNodeName(){
+        return checkpoint.name;
+    }
+
 }

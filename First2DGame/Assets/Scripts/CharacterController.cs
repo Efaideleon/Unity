@@ -27,20 +27,25 @@ public class CharacterController : MonoBehaviour
     {
         currentNodeName = "A";
         counterNodeName = "B";
+
         transform.position = graph.findNode(currentNodeName).Position;
         
     }
 
     private void FixedUpdate()
     {
+
         if (transform.position == graph.findNode(counterNodeName).Position) // 'B' is node where plate counter is at
         {
             hasPlate = true;
         }
-        if (transform.position == graph.findNode("E").Position)
+        else if (graph.findNode(targetNodeName) != null)
         {
-            hasPlate = false;
-            OnFoodDelivered.Invoke();
+            if (transform.position == graph.findNode(targetNodeName).Position)
+            {
+                hasPlate = false;
+                OnFoodDelivered.Invoke();
+            }
         }
     }
 
@@ -52,7 +57,18 @@ public class CharacterController : MonoBehaviour
             Collider2D clickedCollider = Physics2D.OverlapPoint(mouseWorldPosition);
             if (clickedCollider != null)
             {
-                targetNodeName = clickedCollider.name;
+                if (clickedCollider.tag == "Table")
+                {
+                    targetNodeName = clickedCollider.gameObject.GetComponent<Table>().getNodeName();
+                }
+                else if (clickedCollider.tag == "Counter")
+                {
+                    targetNodeName = clickedCollider.gameObject.GetComponent<Counter>().getCheckPointName();
+                }
+                else 
+                {
+                    targetNodeName = null;
+                }
                 path = graph.createPath(currentNodeName, targetNodeName);
                 if (path != null)
                 {

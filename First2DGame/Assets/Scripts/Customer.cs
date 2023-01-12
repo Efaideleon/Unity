@@ -35,14 +35,10 @@ public class Customer : MonoBehaviour
 
     void OnMouseUp()
     {
-         
         if(onTopOfTable){
             print("placed");
             onSeated();
-            Vector3 offset = new Vector3(5.0f, 0.0f, 0f);
-            transform.position = table.transform.position - offset;
-            this.transform.SetParent(table.transform);
-            placed = true;
+            
         }
         else
         {
@@ -58,6 +54,11 @@ public class Customer : MonoBehaviour
     void onSeated()
     {
         animator.SetBool("isSeated", true);
+        Vector3 offset = new Vector3(5.0f, -0.5f, 0f);
+        transform.position = table.transform.position - offset;
+        this.transform.SetParent(table.transform);
+        placed = true;
+        this.gameObject.GetComponent<Collider2D>().enabled = false;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
