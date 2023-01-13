@@ -28,20 +28,20 @@ public class CharacterController : MonoBehaviour
         currentNodeName = "A";
         counterNodeName = "B";
 
-        transform.position = graph.findNode(currentNodeName).Position;
+        transform.position = graph.findNode(currentNodeName).transform.position;
         
     }
 
     private void FixedUpdate()
     {
 
-        if (transform.position == graph.findNode(counterNodeName).Position) // 'B' is node where plate counter is at
+        if (transform.position == graph.findNode(counterNodeName).transform.position) // 'B' is node where plate counter is at
         {
             hasPlate = true;
         }
         else if (graph.findNode(targetNodeName) != null)
         {
-            if (transform.position == graph.findNode(targetNodeName).Position)
+            if (transform.position == graph.findNode(targetNodeName).transform.position)
             {
                 hasPlate = false;
                 OnFoodDelivered.Invoke();

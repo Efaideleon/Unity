@@ -11,23 +11,21 @@ namespace sadefai
 {
     public class Graph : MonoBehaviour
     {
-        [SerializeField] private GameObject[] checkpoints;
+        [SerializeField] private Node[] checkPoints;
         private List<Node> nodeList;
 
         public void createGraph(Dictionary<string, string> nodes)
         {
             nodeList = new List<Node>();
             string name;
-            Vector3 position;
             string neighbors;
 
-            for (int i = 0; i < checkpoints.Length; i++)
+            for (int i = 0; i < checkPoints.Length; i++)
             {
-                name = checkpoints[i].name;
-                position = checkpoints[i].transform.position;
+                name = checkPoints[i].name;
                 neighbors = nodes[name];
-
-                nodeList.Add(new Node(name, position, neighbors));
+                checkPoints[i].Neighbors = neighbors;    
+                nodeList.Add(checkPoints[i]);
             }
         }
 
@@ -52,8 +50,7 @@ namespace sadefai
                 print("no path found 2");
                 return null;
             }
-            print(finalNode.Name);
-            print(finalNode.Neighbors);
+
             queue.Add(new List<Node> {currentNode});
 
             while (queue.Any())
@@ -74,14 +71,13 @@ namespace sadefai
                         List<Node> newPath = new List<Node>(nodePath);
                         newPath.Add(neighbor);
                         queue.Add(newPath);
-
-                        if (neighbor.Name == finalNode.Name)
+                        if (neighbor.name == finalNode.name)
                         {   
                             print("shortest path found");
                             foreach(Node node1 in newPath)
                             {
-                                path.Add(node1.Position);
-                                print(node1.Name);
+                                path.Add(node1.transform.position);
+                                print(node1.name);
                             }
                             return path;
                         }
@@ -101,7 +97,7 @@ namespace sadefai
 
         public Node findNode(string name)
         {
-            return nodeList.Find(x => x.Name == name);         
+            return nodeList.Find(x => x.name == name);         
         }
 
         public bool isNodeClicked(string clickedNodeName, string checkNodeName )
@@ -121,16 +117,16 @@ namespace sadefai
             return false;
         }
 
-        public void addNodeToGraph(string name, Vector3 position, string neighbors)
+        public void addNodeToGraph(Node checkpoint)
         {
             Node node;
-            nodeList.Add(new Node(name, position, neighbors));
-            for(int i = 0; i < neighbors.Length; i++)
+            nodeList.Add(checkpoint);
+            for(int i = 0; i < checkpoint.Neighbors.Length; i++)
             {
-                node = findNode(neighbors[i].ToString());
-                print("lsdkfjs" + node.Name);
-                node.Neighbors += name;
-                print(findNode(node.Name).Neighbors);
+                print(" checkpoint being added to the graph smell efais: " + checkpoint.name + checkpoint.GetHashCode());
+                node = findNode(checkpoint.Neighbors[i].ToString());
+                node.Neighbors += checkpoint.name;
+                print(" the dumb node after : " + node.GetHashCode());
             }
         }
 
@@ -143,8 +139,7 @@ namespace sadefai
             {
                 for(int i = 0; i < nodeList.Count; i++)
                 {
-                    print(nodeList[i].Name);
-                    print(nodeList[i].Neighbors);
+                    print("Node Name: " + nodeList[i].name + ": Neighbors: " + nodeList[i].Neighbors);
                 }
             }
             

@@ -31,7 +31,7 @@ public class TablesManager : MonoBehaviour
         listOfTables = new List<Table>();
 
         string [] tableNodeNames = {"W", "X", "Y", "Z"};
-        string [] neighbors = { "A", "B", "C", "N"};
+        string [] neighbors = { "O", "N", "O", "N"};    
         for(int i = 0; i < numOfTablesAtStart; i++)
         {
             
@@ -39,5 +39,14 @@ public class TablesManager : MonoBehaviour
             table.createCheckPoint(gameController, tableNodeNames[i], neighbors[i]);
             listOfTables.Add(table);
         } 
+
+        foreach(Table table in listOfTables)
+        {
+            print(table.getNodeName()+ "table hashcode :p = " + table.GetHashCode());
+            print(table.transform.position);
+        }
+
+        gameController.getGraph().printNodeList();
+            print("-------------------------");
     }
 }

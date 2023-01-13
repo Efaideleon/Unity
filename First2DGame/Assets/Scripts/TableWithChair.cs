@@ -4,7 +4,7 @@ using UnityEngine;
 using sadefai;
 public class Table : MonoBehaviour
 {
-    [SerializeField] private GameObject checkpoint; 
+    [SerializeField] private Node checkpoint; 
     void Awake()
     {
 
@@ -18,10 +18,13 @@ public class Table : MonoBehaviour
     {
         Instantiate(checkpoint, this.transform.position, Quaternion.identity, this.transform);
         checkpoint.name = name; 
-        print(checkpoint.name);
+        checkpoint.Neighbors = neighbors;
+        print("Creating Checkpoint for a new Table");
+        print("checkpoint name: " + checkpoint.name);
+        print("checkpoint neighbors: " + checkpoint.Neighbors);
+        gameController.getGraph().addNodeToGraph(checkpoint);
+        print("Printing Graph After Adding Checkpoint: " + checkpoint.name);
         gameController.getGraph().printNodeList();
-
-        gameController.getGraph().addNodeToGraph(name, new Vector3(-8.55f, 1.15f, 0f), neighbors);
     }
 
     public string getNodeName(){

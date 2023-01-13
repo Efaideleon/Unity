@@ -59,8 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e39e8a81644643e7a35c8ee79cdd2be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpoint: {fileID: 6678239289600019129, guid: 73ca6a501a0564f82a3fd2e1fb062cd1, type: 3}
-  gameController: {fileID: 0}
+  checkpoint: {fileID: -1665819939236046220, guid: 73ca6a501a0564f82a3fd2e1fb062cd1, type: 3}
 --- !u!61 &576793811784709735
 BoxCollider2D:
   m_ObjectHideFlags: 0
