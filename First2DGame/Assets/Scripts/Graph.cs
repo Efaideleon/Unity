@@ -40,7 +40,7 @@ namespace sadefai
             List<List<Node>> queue =  new List<List<Node>>();
             List<Node> nodePath = new List<Node>();
             Node node;
-
+            
             if(currentNode == null || finalNode == null)
             {
                 print("no path found 1");
@@ -52,7 +52,8 @@ namespace sadefai
                 print("no path found 2");
                 return null;
             }
-            
+            print(finalNode.Name);
+            print(finalNode.Neighbors);
             queue.Add(new List<Node> {currentNode});
 
             while (queue.Any())
@@ -118,6 +119,35 @@ namespace sadefai
                 }
             }
             return false;
+        }
+
+        public void addNodeToGraph(string name, Vector3 position, string neighbors)
+        {
+            Node node;
+            nodeList.Add(new Node(name, position, neighbors));
+            for(int i = 0; i < neighbors.Length; i++)
+            {
+                node = findNode(neighbors[i].ToString());
+                print("lsdkfjs" + node.Name);
+                node.Neighbors += name;
+                print(findNode(node.Name).Neighbors);
+            }
+        }
+
+        public void printNodeList(){
+            if (nodeList == null)
+            {
+                print("nodeList is empty");
+            }
+            else
+            {
+                for(int i = 0; i < nodeList.Count; i++)
+                {
+                    print(nodeList[i].Name);
+                    print(nodeList[i].Neighbors);
+                }
+            }
+            
         }
     }
 }

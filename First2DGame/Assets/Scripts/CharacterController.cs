@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] private Graph graph;
-    private float speed = 6;
+    [SerializeField] private float speed = 6;
     private int currentCheckpoint = 0;
     private bool move = true;
     float distanceLeft = 0;
@@ -59,6 +59,7 @@ public class CharacterController : MonoBehaviour
             {
                 if (clickedCollider.tag == "Table")
                 {
+                    print("you clicked on a table");
                     targetNodeName = clickedCollider.gameObject.GetComponent<Table>().getNodeName();
                 }
                 else if (clickedCollider.tag == "Counter")

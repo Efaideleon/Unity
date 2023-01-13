@@ -46,4 +46,10 @@ public class GameController : MonoBehaviour
         
         
     }
+
+    public Graph getGraph()
+    {
+        return graph;
+    }
+
 }
