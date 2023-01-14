@@ -34,7 +34,7 @@ public class TablesManager : MonoBehaviour
         string [] neighbors = { "N", "O", "N", "O"};    
         for(int i = 0; i < numOfTablesAtStart; i++)
         {
-            
+    
             Table table = Instantiate(tablePrefab, listOfPositions[i], Quaternion.identity, this.transform);
             table.createCheckPoint(gameController, tableNodeNames[i], neighbors[i]);
             listOfTables.Add(table);
@@ -45,8 +45,5 @@ public class TablesManager : MonoBehaviour
             print(table.getNodeName()+ "table hashcode :p = " + table.GetHashCode());
             print(table.transform.position);
         }
-
-        gameController.getGraph().printNodeList();
-            print("-------------------------");
     }
 }
