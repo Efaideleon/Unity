@@ -15,9 +15,11 @@ public class Table : MonoBehaviour
         
     }
 
-    public void createCheckPoint(GameController gameController, string name, string neighbors)
+    public void createCheckPoint(GameController gameController, string name, List<string> neighbors)
     {
-        node = Instantiate(checkpoint, this.transform.position, Quaternion.identity, this.transform);
+        Vector3 position = this.transform.position;
+        position.y += 2;
+        node = Instantiate(checkpoint, position, Quaternion.identity, this.transform);
         node.name = name; 
         node.Neighbors = neighbors;
         print("Creating Checkpoint for a new Table");

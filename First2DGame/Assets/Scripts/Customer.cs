@@ -21,7 +21,6 @@ public class Customer : MonoBehaviour
         if(!dragging) return;
         var mousePosition = GetMousePos();
         transform.position = mousePosition - offset;
-
     }
 
     void OnMouseDown()
@@ -30,7 +29,6 @@ public class Customer : MonoBehaviour
         offset = GetMousePos() - (Vector2)transform.position;
         print("mouse is down");
         //call an event 
-
     }
 
     void OnMouseUp()
@@ -38,7 +36,6 @@ public class Customer : MonoBehaviour
         if(onTopOfTable){
             print("placed");
             onSeated();
-            
         }
         else
         {
@@ -54,7 +51,7 @@ public class Customer : MonoBehaviour
     void onSeated()
     {
         animator.SetBool("isSeated", true);
-        Vector3 offset = new Vector3(5.0f, -0.5f, 0f);
+        Vector3 offset = new Vector3(1.8f, -0.5f, 0f); //use function to compute Vector
         transform.position = table.transform.position - offset;
         this.transform.SetParent(table.transform);
         placed = true;
@@ -79,5 +76,4 @@ public class Customer : MonoBehaviour
             print("out of table");
         }
     }
-
 }

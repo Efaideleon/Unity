@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    private string neighbors;
+    private List<string> neighbors;
 
-    public string Neighbors
+    public List<string> Neighbors
     {
         get { return neighbors; }
         set { this.neighbors = value; }  
     }
 }
-
 

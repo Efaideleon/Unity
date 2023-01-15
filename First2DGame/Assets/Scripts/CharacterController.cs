@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] private Graph graph;
-    [SerializeField] private float speed = 6;
+    [SerializeField] private float speed = 12;
     private int currentCheckpoint = 0;
     private bool move = true;
     float distanceLeft = 0;
@@ -25,17 +25,14 @@ public class CharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentNodeName = "A";
-        counterNodeName = "B";
-
+        currentNodeName = "1";
+        counterNodeName = "O";
         transform.position = graph.findNode(currentNodeName).transform.position;
-        
     }
 
     private void FixedUpdate()
     {
-
-        if (transform.position == graph.findNode(counterNodeName).transform.position) // 'B' is node where plate counter is at
+        if (transform.position == graph.findNode(counterNodeName).transform.position)
         {
             hasPlate = true;
         }
@@ -49,27 +46,14 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    public void Move(bool mclick)
+    public void Move(bool mclick) //move where you click
     {
         if (mclick && distanceLeft == 0)
         {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Collider2D clickedCollider = Physics2D.OverlapPoint(mouseWorldPosition);
+            Collider2D clickedCollider = getClickedCollider(Input.mousePosition);
             if (clickedCollider != null)
             {
-                if (clickedCollider.tag == "Table")
-                {
-                    print("you clicked on a table");
-                    targetNodeName = clickedCollider.gameObject.GetComponent<Table>().getNodeName();
-                }
-                else if (clickedCollider.tag == "Counter")
-                {
-                    targetNodeName = clickedCollider.gameObject.GetComponent<Counter>().getCheckPointName();
-                }
-                else 
-                {
-                    targetNodeName = null;
-                }
+                targetNodeName = getTargetNodeName(clickedCollider);
                 path = graph.createPath(currentNodeName, targetNodeName);
                 if (path != null)
                 {
@@ -79,6 +63,33 @@ public class CharacterController : MonoBehaviour
                 }
             }
         }
+        traversePath(path);
+    }
+    public Collider2D getClickedCollider(Vector3 mousePosition)
+    {
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return Physics2D.OverlapPoint(mouseWorldPosition);
+    }
+
+    public string getTargetNodeName(Collider2D clickedCollider)
+    {
+        if (clickedCollider.tag == "Table")
+        {
+            print("you clicked on a table");
+            return clickedCollider.gameObject.GetComponent<Table>().getNodeName();
+        }
+        else if (clickedCollider.tag == "Counter")
+        {
+            return clickedCollider.gameObject.GetComponent<Counter>().getCheckPointName();
+        }
+        else 
+        {
+            return null;
+        }
+    }
+
+    public void traversePath(List<Vector3> path)
+    {
         if (path != null)
         {
             if (move)
@@ -96,10 +107,8 @@ public class CharacterController : MonoBehaviour
             }
         }
     }
-
     public bool HasPlate()
     {
         return hasPlate;
     }
-
 }

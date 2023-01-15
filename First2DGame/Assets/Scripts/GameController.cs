@@ -11,23 +11,19 @@ public class GameController : MonoBehaviour
     
     void Awake()
     {
-        Dictionary<string, string> nodeNeighbors = new Dictionary<string, string>
+        Dictionary<string, List<string>> nodeNeighbors = new Dictionary<string, List<string>>
         {
-            { "A", "BD" },
-            { "B", "ACF" },
-            { "C", "BH" },
-            { "D", "NAI" },
-            //{ "E", "N" }, //revise
-            { "F", "NBOK" },
-            //{ "G", "O" },
-            { "H", "COM" },
-            { "I", "DK" },
-            //{ "J", "N" },
-            { "K", "IFM" },
-            //{ "L", "O" },
-            { "M", "KH"},
-            { "N", "DF"},
-            { "O", "FH" }
+            { "1", new List<string>{"2", "8"} },
+            { "2", new List<string>{"3", "1", "O"} },
+            { "3", new List<string>{"2", "4", "10"} },
+            { "4", new List<string>{"3", "5"} },
+            { "5", new List<string>{"4", "12"} },
+            { "8", new List<string>{"1", "9"} },
+            { "9", new List<string>{"8", "10"} },
+            { "10", new List<string>{"9", "3", "11"} },
+            { "11", new List<string>{"10", "12"} },
+            { "12", new List<string>{"5", "11"} },
+            { "O", new List<string>{"2"}}
         };
         graph.createGraph(nodeNeighbors);
         customerQueue = new List<GameObject>();

@@ -14,17 +14,13 @@ namespace sadefai
         [SerializeField] private Node[] checkPoints;
         private List<Node> nodeList;
 
-        public void createGraph(Dictionary<string, string> nodes)
+        public void createGraph(Dictionary<string,List<string>> neighborsDictionary)
         {
             nodeList = new List<Node>();
-            string name;
-            string neighbors;
-
             for (int i = 0; i < checkPoints.Length; i++)
             {
-                name = checkPoints[i].name;
-                neighbors = nodes[name];
-                checkPoints[i].Neighbors = neighbors;    
+                //adding new neighbors tp existing nodes 
+                checkPoints[i].Neighbors = neighborsDictionary[checkPoints[i].name];    
                 nodeList.Add(checkPoints[i]);
             }
         }
@@ -62,9 +58,9 @@ namespace sadefai
                 if (!explored.Contains(node))
                 {
                     List<Node> neighbors = new List<Node>();
-                    foreach(char neighbor in node.Neighbors)
+                    foreach(string neighbor in node.Neighbors)
                     {
-                        neighbors.Add(findNode(neighbor.ToString()));
+                        neighbors.Add(findNode(neighbor));
                     }
                     foreach(Node neighbor in neighbors)
                     {
@@ -121,11 +117,11 @@ namespace sadefai
         {
             Node node;
             nodeList.Add(checkpoint);
-            for(int i = 0; i < checkpoint.Neighbors.Length; i++)
+            for(int i = 0; i < checkpoint.Neighbors.Count; i++)
             {
                 print(" checkpoint being added to the graph smell efais: " + checkpoint.name + checkpoint.GetHashCode());
-                node = findNode(checkpoint.Neighbors[i].ToString());
-                node.Neighbors += checkpoint.name;
+                node = findNode(checkpoint.Neighbors[i]);
+                node.Neighbors.Add(checkpoint.name);
                 print(" the dumb node after : " + node.GetHashCode());
             }
         }
